@@ -1,12 +1,25 @@
-# React + Vite
+🛠️ โครงสร้างโปรเจกต์ที่ต้องมี:
+ให้แบ่งหน้าเว็บออกเป็น 3 หน้าหลัก โดยใช้ createBrowserRouter ในการจัดการ Route ดังนี้:
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. ส่วน Layout หลัก (RootLayout)
+ต้องมี: Navbar ที่แสดงอยู่ทุกหน้า
+Navbar: ให้มีลิงก์ไปหน้า "Shop" และหน้า "Cart"
+เงื่อนไข: ในหน้า Navbar ต้องแสดง "จำนวนสินค้าในตะกร้า (Cart Count)" ตลอดเวลา (ข้อมูลนี้ต้องดึงมาจาก Zustand Store)
+2. หน้ารายการสินค้า (Product List Page - Path: /)
+(เอกสาร https://dummyjson.com/docs/products)
+การดึงข้อมูล: ใช้ loader ดึงข้อมูลสินค้า มาแสดงผล
+https://dummyjson.com/products
+การแสดงผล: แสดงรายการสินค้า โดยแต่ละรายการต้องมี:
+ชื่อสินค้า
+ราคา
+ปุ่ม หรือ ลิงก์ "View Detail" เพื่อกดไปดูรายละเอียดรายชิ้น
+3. หน้ารายละเอียดสินค้า (Product Detail Page - Path: /product/:id)
+การดึงข้อมูล: ใช้ loader ร่วมกับ params เพื่อไปหาข้อมูลสินค้าที่กดเข้ามา
+การแสดงผล: แสดงชื่อสินค้า, ราคา และคำอธิบาย (Description)
+ฟังก์ชัน: มีปุ่ม "Add to Cart"
+เมื่อกดแล้ว ให้เรียกฟังก์ชันจาก Zustand Store เพื่อเพิ่มสินค้านี้เข้าตะกร้า
+(Optional) เมื่อเพิ่มเสร็จให้แสดง alert หรือใช้ useNavigate เด้งกลับไปหน้าแรก
+4. หน้าตะกร้าสินค้า (Cart Page - Path: /cart)
+การแสดงผล: ดึงข้อมูลสินค้าที่อยู่ในตะกร้าจาก Zustand Store มาวน Loop แสดงผล
+เงื่อนไข: ถ้าไม่มีสินค้าในตะกร้า ให้ขึ้นข้อความว่า "Your cart is empty"
+ฟังก์ชัน (Bonus): มีปุ่ม "Remove" เพื่อลบสินค้าชิ้นนั้นออกจากตะกร้า
